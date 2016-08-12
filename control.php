@@ -78,10 +78,22 @@ class MultiColumnTaxonomyList_WidgetShortcodeControl extends WidgetShortcodeCont
 		<?php endfor; ?>
 		</select>
 		</p>
+		
+		<p>
+		<input type="hidden" name="<?php echo $this->get_field_name( 'show_post_count' ); ?>" value="no" />
+		<input type="checkbox" name="<?php echo $this->get_field_name( 'show_post_count' ); ?>" value="yes" <?php checked($show_post_count, 'yes'); ?> />
+		Show Post Count
+		</p>		
+
+		<p>
+		<input type="hidden" name="<?php echo $this->get_field_name( 'hide_empty_items' ); ?>" value="no" />
+		<input type="checkbox" name="<?php echo $this->get_field_name( 'hide_empty_items' ); ?>" value="yes" <?php checked($hide_empty_items, 'yes'); ?> />
+		Hide Empty Items
+		</p>		
 
 		<p>
 		<input type="hidden" name="<?php echo $this->get_field_name( 'show_post_list' ); ?>" value="no" />
-		<input type="checkbox" name="<?php echo $this->get_field_name( 'show_post_list' ); ?>" value="yes" <?php checked($show_post_list, 'true'); ?> />
+		<input type="checkbox" name="<?php echo $this->get_field_name( 'show_post_list' ); ?>" value="yes" <?php checked($show_post_list, 'yes'); ?> />
 		Show Post List
 		</p>
 		
@@ -109,6 +121,8 @@ class MultiColumnTaxonomyList_WidgetShortcodeControl extends WidgetShortcodeCont
 		$defaults['columns'] = 3;
 
 		$defaults['show_post_list'] = 'no';
+		$defaults['hide_empty_items'] = 'no';
+		$defaults['show_post_count'] = 'no';
 		
 		return $defaults;
 	}
@@ -161,6 +175,10 @@ class MultiColumnTaxonomyList_WidgetShortcodeControl extends WidgetShortcodeCont
 			if( is_a( $terms_list, 'WP_Error' ) ) {
 				$error = $terms_list->get_error_message();
 				$terms_list = array();
+			} elseif( $hide_empty_items ) {
+				$terms_list = array_filter( $terms_list, function($v) {
+					return ( $v->count > 0 );
+				} );
 			}
 		}
 		
@@ -202,7 +220,13 @@ class MultiColumnTaxonomyList_WidgetShortcodeControl extends WidgetShortcodeCont
 			{
 				$link = get_term_link( $term, $term->taxonomy );
 				echo '<li>';
-				echo '<div class="term-title"><a href="' . esc_attr( $link ) . '" title="' . esc_attr( $term->name ) . '">' . $term->name . '</a></div>';
+				echo '<div class="term-title"><a href="' . esc_attr( $link ) . '" title="' . esc_attr( $term->name ) . '">' . $term->name;
+				if( 'yes' == $show_post_count )
+				{
+					echo ' (' . $term->count . ')';
+				}
+				echo '</a></div>';
+				
 				if( ! empty( $term->posts ) )
 				{
 					echo '<ul>';
