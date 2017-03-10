@@ -1,9 +1,9 @@
 <?php
 /*
-Plugin Name: Multi-Column Taxonomy List
+Plugin Name: Multi-Column Taxonomy List Plus
 Plugin URI: https://github.com/clas-web/multi-column-taxonomy-list
 Description: 
-Version: 1.0.0
+Version: 2.0
 Author: Crystal Barton
 Author URI: http://www.crystalbarton.com
 */
