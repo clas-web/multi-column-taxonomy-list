@@ -1,7 +1,5 @@
 <?php
 
-require_once( __DIR__.'/widget-shortcode-control.php' );
-
 /**
  * The MultiColumnTaxonomyList_WidgetShortcodeControl class for the "Multi-Column Taxonomy List" plugin.
  * Derived from the official WP RSS widget.

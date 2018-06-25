@@ -3,7 +3,7 @@
 Plugin Name: Multi-Column Taxonomy List Plus
 Plugin URI: https://github.com/clas-web/multi-column-taxonomy-list
 Description: 
-Version: 2.1.0
+Version: 2.1.1
 Author: Crystal Barton
 Author URI: http://www.crystalbarton.com
 GitHub Plugin URI: https://github.com/clas-web/multi-column-taxonomy-list
