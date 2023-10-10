@@ -61,7 +61,8 @@ class MultiColumnTaxonomyList_WidgetShortcodeControl extends WidgetShortcodeCont
 		<br/>
 		<?php foreach( $all_taxonomies as $tax ): ?>
 			<?php if( in_array($tax->name, $exclude_taxonomies) ) continue; ?>
-			<input type="radio" name="<?php echo $this->get_field_name( 'taxonomy' ); ?>" value="<?php echo esc_attr( $tax->name ); ?>" <?php echo ( in_array($tax->name, $taxonomies) ? 'checked' : '' ); ?> />
+			<input type="radio" name="<?php echo $this->get_field_name( 'taxonomy' ); ?>" value="<?php echo esc_attr( $tax->name ); ?>" 
+			<?php if (is_array($taxonomies)) echo ( in_array($tax->name, $taxonomies) ? 'checked' : '' ); ?> />
 			<?php echo $tax->label; ?>
 			<br/>
 		<?php endforeach; ?>
